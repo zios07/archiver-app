@@ -1,0 +1,60 @@
+package common.server.rest;
+
+
+import common.server.domain.TestCase;
+import common.server.domain.TreeNode;
+import common.server.exception.NotFoundException;
+import common.server.service.ITestCaseService;
+import common.server.service.ITreeNodeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("api/test-cases")
+public class TestCaseController {
+
+    @Autowired
+    private ITestCaseService testCaseService;
+
+    @Autowired
+    private ITreeNodeService treeNodeService;
+
+    @GetMapping
+    public List<TestCase> getConnectedUserTestCases() {
+        return testCaseService.getConnectedUserTestCases();
+    }
+
+    @PostMapping
+    public TestCase createTestCase(@RequestBody TestCase testCase) {
+        return testCaseService.addTestCase(testCase);
+    }
+
+    @PostMapping(value = "node")
+    public TreeNode createNode(@RequestBody TreeNode node) {
+        return treeNodeService.addTreeNode(node);
+    }
+
+    @PostMapping(value = "node/multiple")
+    public List<TreeNode> createMultipleNodes(@RequestBody TreeNode[] nodes) {
+        return treeNodeService.addMultipleNodes(nodes);
+    }
+
+    @GetMapping(value = "tree")
+    public List<TreeNode> getUserTree() {
+        return treeNodeService.getUserTree();
+    }
+
+    @DeleteMapping(value = "tree/node/{id}")
+    public void deleteTreeNode(@PathVariable Long id) throws NotFoundException {
+        treeNodeService.deleteTreeNode(id);
+    }
+
+    @PutMapping(value = "tree/node")
+    public TreeNode deleteTreeNode(@RequestBody TreeNode node) {
+        return treeNodeService.updateNode(node);
+    }
+
+}

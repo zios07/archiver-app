@@ -1,0 +1,35 @@
+<br><br>
+<form class="text-center border border-light p-5">
+  <p class="h4 mb-4">User requests for archiving</p>
+</form>
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-10">
+      <table mdbTable responsive="true">
+        <thead>
+          <tr>
+            <th style="width: 120px" *ngFor="let head of headElements" scope="col">{{head}} </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let el of elements">
+            <th scope="row">{{el.id}}</th>
+            <td>{{el.heading2}}</td>
+            <td>{{el.heading4}}</td>
+            <td>{{el.heading5}}</td>
+            <td>
+              <button type="button" mdbBtn color="green" mdbWavesEffect>Accept and archive</button>
+              <button type="button" mdbBtn color="dark" mdbWavesEffect>Decline request</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>

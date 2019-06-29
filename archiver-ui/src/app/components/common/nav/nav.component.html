@@ -1,0 +1,88 @@
+<ng-container class="font-small unique-color-dark pt-4">
+  <mat-toolbar color="primary" *ngIf="authenticated">
+    <a mat-button color="secondary" routerLink="home">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+      <span>HOME</span>
+    </a>
+
+    <!-- Admin menu -->
+
+    <button class="mat-button-menu" mat-button routerLink="document/list" *ngIf="username === 'admin'">
+      <mat-icon>list</mat-icon>
+      <span>Documents list</span>
+    </button>
+
+    <button class="mat-button-menu" mat-button routerLink="requests" *ngIf="username === 'admin'">
+      <mat-icon>poll</mat-icon>
+      <span>Archiving requests</span>
+    </button>
+
+    <!-- Candidat menu -->
+
+    <button class="mat-button-menu" mat-button [matMenuTriggerFor]="documentMenu" *ngIf="username === 'user'">
+      <mat-icon>list</mat-icon>&nbsp;
+      <span>Documents</span>
+    </button>
+
+    <span class="fill-remaining-space"></span>
+    <!-- Fake shit -->
+    <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{username}}</b></span>
+
+    <!-- Real shit -->
+    <!-- <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{connectedUser?.account.username}}</b></span> -->
+    <button class="mat-button-menu" mat-button [matMenuTriggerFor]="authMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <mat-menu #documentMenu="matMenu">
+      <a mat-menu-item routerLink="document/create">
+        <mat-icon>add</mat-icon>
+        <span>Create document</span>
+      </a>
+      <a mat-menu-item routerLink="my-documents">
+        <mat-icon>list</mat-icon>
+        <span>View my documents</span>
+      </a>
+    </mat-menu>
+
+    <mat-menu #authMenu="matMenu">
+      <a mat-menu-item routerLink="profile">
+        <mat-icon>person</mat-icon>
+        <span>Profil</span>
+      </a>
+      <a mat-menu-item (click)="logout()">
+        <mat-icon>clear</mat-icon>
+        <span>Deconnexion</span>
+      </a>
+    </mat-menu>
+
+  </mat-toolbar>
+
+  <mat-toolbar color="primary" *ngIf="!authenticated">
+
+    <a mat-button color="primary" routerLink="">
+      <mat-icon>home</mat-icon>&nbsp;
+      <span>My Application</span>
+    </a>
+
+    <span class="fill-remaining-space"></span>
+
+    <button class="mat-button-menu" mat-button [matMenuTriggerFor]="authmenu">
+      <!-- <mat-icon>security</mat-icon> -->
+      <span>Sign in/up</span>
+    </button>
+
+    <mat-menu #authmenu="matMenu">
+
+      <a routerLink="login" mat-menu-item color="primary">
+        <span>Login</span>
+      </a>
+
+      <a routerLink="signup" mat-menu-item color="primary">
+        <span>Register</span>
+      </a>
+    </mat-menu>
+
+
+  </mat-toolbar>
+</ng-container>

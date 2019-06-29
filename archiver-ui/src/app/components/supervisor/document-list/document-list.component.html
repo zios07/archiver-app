@@ -1,0 +1,40 @@
+<br><br>
+<form class="text-center border border-light p-5">
+  <p class="h4 mb-4">Documents uploaded by users</p>
+</form>
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-10">
+      <table mdbTable responsive="true">
+        <thead>
+          <tr>
+            <th style="width: 120px" *ngFor="let head of headElements" scope="col">{{head}} </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let el of elements">
+            <td>{{el.heading2}}</td>
+            <td>{{el.heading4}}</td>
+            <td>{{el.heading5}}</td>
+            <td>{{el.heading6}}</td>
+            <td>{{el.heading7}}</td>
+            <td>{{el.heading8}}</td>
+            <td>
+                <mdb-badge *ngIf="el.heading9 ==='ARCHIVED'" color="green">{{el.heading9}}</mdb-badge>
+                <mdb-badge *ngIf="el.heading9 ==='NOT ARCHIVED'" color="red">{{el.heading9}}</mdb-badge>
+            </td>
+            <td>
+              <button type="button" mdbBtn color="green" mdbWavesEffect>Download</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+    <div class="col">
+    </div>
+  </div>
+</div>

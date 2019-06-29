@@ -1,0 +1,9 @@
+<div *ngIf="auth.isAuthenticated()">
+
+    <app-document-list *ngIf="tokenService.getToken() === 'admin'"></app-document-list>
+    <app-my-documents *ngIf="tokenService.getToken() === 'user'"></app-my-documents>
+
+</div>
+<div *ngIf="!auth.isAuthenticated()">
+    <app-login></app-login>
+</div>
