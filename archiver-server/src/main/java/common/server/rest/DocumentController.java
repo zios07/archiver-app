@@ -46,6 +46,12 @@ public class DocumentController {
         return new ResponseEntity<>(documents, HttpStatus.OK);
     }
 
+    @GetMapping(value = "admin/non-archived")
+    public ResponseEntity<List<Document>> getNonArchivedDocuments() throws NotFoundException {
+        List<Document> documents = service.getNonArchivedDocuments();
+        return new ResponseEntity<>(documents, HttpStatus.OK);
+    }
+
     @GetMapping(value = "{id}")
     public ResponseEntity<Document> findDocument(@PathVariable long id) throws NotFoundException {
         Document document = service.findDocument(id);
@@ -61,7 +67,14 @@ public class DocumentController {
     @PostMapping
     public ResponseEntity<Document> addDocument(@RequestParam("metadata") String metadata, @RequestParam("document") MultipartFile document) throws IOException {
         Document savedDocument = service.addDocument(metadata, document);
-        return new ResponseEntity<Document>(savedDocument, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedDocument, HttpStatus.CREATED);
+    }
+
+
+    @PutMapping
+    public ResponseEntity<Document> addDocument(@RequestBody Document document) throws IOException {
+        Document savedDocument = service.updateDocument(document);
+        return new ResponseEntity<>(savedDocument, HttpStatus.CREATED);
     }
 
 

@@ -9,7 +9,7 @@ import { DocumentService } from 'src/app/services/document.service';
 })
 export class MyDocumentsComponent implements OnInit {
 
-  headElements = ['Document name', 'Document description', 'Size', 'Last modification'];
+  headElements = ['Document name', 'Document description', 'Size', 'Last modification', 'Status'];
   docs = [];
 
   constructor(private documentService: DocumentService, private toastr: ToastrService) { }

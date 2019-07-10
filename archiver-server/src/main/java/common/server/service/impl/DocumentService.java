@@ -35,7 +35,7 @@ public class DocumentService implements IDocumentService {
     @Override
     public Document updateDocument(Document document) {
         Document savedDocument = documentRepository.getOne(document.getId());
-        savedDocument.getRequest().setStatus("Archived");
+        savedDocument.getRequest().setStatus(document.getRequest().getStatus());
         savedDocument.setLastModif(new Date());
         return documentRepository.save(savedDocument);
     }
@@ -86,5 +86,13 @@ public class DocumentService implements IDocumentService {
         document.setLastModif(new Date());
         document.setMime(file.getContentType());
         return this.addDocument(document);
+    }
+
+    @Override
+    public List<Document> getNonArchivedDocuments() {
+        return documentRepository.findByRequestStatus("Not Archived").stream().map(document -> {
+            document.setContent(null);
+            return document;
+        }).collect(Collectors.toList());
     }
 }

@@ -48,7 +48,7 @@ export class DocumentComponent implements OnInit {
       observable = this.documentService.saveDocument(this.document, this.content);
     } else if (this.mode === 'EDIT') {
       this.document.id = this.id;
-      observable = this.documentService.updateDocument(this.document, this.content);
+      observable = this.documentService.updateDocument(this.document);
     }
     observable.subscribe(resp => {
       this.toastr.success('Document enregistré avec succès');

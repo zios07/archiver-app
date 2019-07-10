@@ -20,12 +20,8 @@ export class DocumentService {
     return this.http.post(this.url, fd);
   }
 
-  updateDocument(document, content) {
-    const fd = new FormData();
-    const blob = new Blob([content], { type: 'application/json' });
-    fd.append('document', blob, content.name);
-    fd.append('metadata', JSON.stringify(document));
-    return this.http.post(this.url, fd);
+  updateDocument(document) {
+    return this.http.put(this.url, document);
   }
 
   delete(id) {
@@ -46,5 +42,9 @@ export class DocumentService {
 
   findAll() {
     return this.http.get(this.url);
+  }
+
+  getNonArchivedDocuments() {
+    return this.http.get(this.url + '/admin/non-archived');
   }
 }

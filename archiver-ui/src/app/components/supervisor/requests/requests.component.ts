@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { DocumentService } from 'src/app/services/document.service';
 
 @Component({
   selector: 'app-requests',
@@ -8,37 +10,39 @@ import { Component, OnInit } from '@angular/core';
 export class RequestsComponent implements OnInit {
 
 
-  elements: any = [
-    {
-      id: 1, heading1: '1',
-      heading2: 'User 1',
-      heading4: 'My resume',
-      heading5: '20-01-2019',
-    },
-    {
-      id: 2, heading1: '',
-      heading2: 'User 2',
-      heading4: 'Spring boot slides',
-      heading5: '03-03-2019',
-    },
-    {
-      id: 3, heading1: '',
-      heading2: 'User 3',
-      heading4: 'SOA architecture presentation',
-      heading5: '01-04-2019',
-    },
-    {
-      id: 4, heading1: '',
-      heading2: 'User 4',
-      heading4: 'Empty document',
-      heading5: '10-12-2018',
-    },
-  ];
-  headElements = ['Username', 'Document description', 'Size', 'Upload date'];
 
-  constructor() { }
+  headElements = ['Document name', 'Document description', 'Size', 'Last modification', 'Status'];
+  docs = [];
+
+  constructor(private documentService: DocumentService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.getMyDocuments();
   }
 
+  getMyDocuments() {
+    this.documentService.getNonArchivedDocuments().subscribe((resp: any) => {
+      this.docs = resp;
+    }, error => {
+      this.toastr.error('Could not get documents');
+    });
+  }
+
+  acceptRequest(doc) {
+    doc.request.status = 'Archived';
+    this.documentService.updateDocument(doc).subscribe(resp => {
+      this.toastr.success('Document mis a jour');
+    }, error => {
+      this.toastr.error('Erreur inconnue');
+    });
+  }
+
+  declineRequest(doc) {
+    doc.request.status = 'Declined';
+    this.documentService.updateDocument(doc).subscribe(resp => {
+      this.toastr.success('Document mis a jour');
+    }, error => {
+      this.toastr.error('Erreur inconnue');
+    });
+  }
 }

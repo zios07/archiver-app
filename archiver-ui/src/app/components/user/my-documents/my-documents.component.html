@@ -17,7 +17,12 @@
             <td>{{el.name}}</td>
             <td>{{el.description}}</td>
             <td>{{el.size}}</td>
-            <td>{{el.lastModif}}Ø</td>
+            <td>{{el.lastModif}}</td>
+            <td>
+              <mdb-badge *ngIf="el.request.status ==='Archived'" color="green">{{el.request.status}}</mdb-badge>
+              <mdb-badge *ngIf="el.request.status ==='Not Archived'" color="yellow">{{el.request.status}}</mdb-badge>
+              <mdb-badge *ngIf="el.request.status ==='Declined'" color="red">{{el.request.status}}</mdb-badge>
+          </td>
             <td>
               <button type="button" mdbBtn color="green" (click)="download(el.id)" mdbWavesEffect>Download</button>
               <button type="button" mdbBtn color="red" (click)="delete(el.id)" mdbWavesEffect>Delete</button>

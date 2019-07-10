@@ -15,19 +15,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr mdbTableCol *ngFor="let el of elements">
-            <td>{{el.heading2}}</td>
-            <td>{{el.heading4}}</td>
-            <td>{{el.heading5}}</td>
-            <td>{{el.heading6}}</td>
-            <td>{{el.heading7}}</td>
-            <td>{{el.heading8}}</td>
+          <tr mdbTableCol *ngFor="let el of docs">
+            <td>{{el.name}}</td>
+            <td>{{el.description}}</td>
+            <td>{{el.size}}</td>
+            <td>{{el.lastModif}}</td>
             <td>
-                <mdb-badge *ngIf="el.heading9 ==='ARCHIVED'" color="green">{{el.heading9}}</mdb-badge>
-                <mdb-badge *ngIf="el.heading9 ==='NOT ARCHIVED'" color="red">{{el.heading9}}</mdb-badge>
+              <mdb-badge *ngIf="el.request.status ==='Archived'" color="green">{{el.request.status}}</mdb-badge>
+              <mdb-badge *ngIf="el.request.status ==='Not Archived'" color="yellow">{{el.request.status}}</mdb-badge>
+              <mdb-badge *ngIf="el.request.status ==='Declined'" color="red">{{el.request.status}}</mdb-badge>
             </td>
             <td>
-              <button type="button" mdbBtn color="green" mdbWavesEffect>Download</button>
+              <button type="button" mdbBtn color="green" (click)="download(el.id)" mdbWavesEffect>Download</button>
             </td>
           </tr>
         </tbody>

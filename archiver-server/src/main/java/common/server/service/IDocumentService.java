@@ -24,4 +24,6 @@ public interface IDocumentService {
 	List<Document> findDocumentsForConnectedUser() throws NotFoundException;
 
 	Document addDocument(String metadata, MultipartFile document) throws IOException;
+
+	List<Document> getNonArchivedDocuments();
 }
