@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -43,35 +44,23 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    // Fake shit
-    this.tokenService.saveToken(this.form.value.username);
-    this.authenticated = true;
-    if (this.form.value.username === 'admin') {
-      this.connectedRole = 'ADMIN';
-    } else {
-      this.connectedRole = 'USER';
-    }
-    this.router.navigate(['home']);
-
-
-    // Real shit
-    // this.authService.login(this.form.value).pipe(delay(1000)).subscribe((resp: any) => {
-    //   this.tokenService.saveToken(resp);
-    //   this.userService.findByUsername(this.form.value.username).subscribe(resp => {
-    //     this.authService.setConnectedUser(resp);
-    //     if (this.returnUrl) {
-    //       this.router.navigate([this.returnUrl]);
-    //     } else {
-    //       this.router.navigate(['home']);
-    //     }
-    //   });
-    // }, resp => {
-    //   this.submitted = false;
-    //   if (resp.status === 401 || resp.status === 403) {
-    //     resp.error ? this.toastr.error(resp.error) : this.toastr.error('Incorrect credentials');
-    //   } else {
-    //     this.toastr.error('Login error. Try again later');
-    //   }
-    // });
+    this.authService.login(this.form.value).pipe(delay(1000)).subscribe((resp: any) => {
+      this.tokenService.saveToken(resp);
+      this.userService.findByUsername(this.form.value.username).subscribe(resp => {
+        this.authService.setConnectedUser(resp);
+        if (this.returnUrl) {
+          this.router.navigate([this.returnUrl]);
+        } else {
+          this.router.navigate(['home']);
+        }
+      });
+    }, resp => {
+      this.submitted = false;
+      if (resp.status === 401 || resp.status === 403) {
+        resp.error ? this.toastr.error(resp.error) : this.toastr.error('Incorrect credentials');
+      } else {
+        this.toastr.error('Login error. Try again later');
+      }
+    });
   }
 }

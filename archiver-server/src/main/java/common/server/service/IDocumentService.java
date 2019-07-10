@@ -21,5 +21,7 @@ public interface IDocumentService {
 
 	List<Document> findDocumentsByUsername(String username) throws NotFoundException;
 
-    Document addDocument(String metadata, MultipartFile document) throws IOException;
+	List<Document> findDocumentsForConnectedUser() throws NotFoundException;
+
+	Document addDocument(String metadata, MultipartFile document) throws IOException;
 }

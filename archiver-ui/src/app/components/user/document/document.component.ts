@@ -29,7 +29,6 @@ export class DocumentComponent implements OnInit {
   ngOnInit() {
     // check if we're in edit mode
     this.loadDocumentToEdit();
-
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
       designation: [null, Validators.required],
@@ -63,7 +62,7 @@ export class DocumentComponent implements OnInit {
 
   removeDocument(id) {
     this.documentService.delete(id).subscribe(resp => {
-      this.toastr.info('Success de suppression');
+      this.toastr.info('Succès de suppression');
       this.ngOnInit();
     }, error => {
       this.toastr.error('Erreur inconnue');

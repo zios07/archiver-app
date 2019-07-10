@@ -7,29 +7,25 @@
 
     <!-- Admin menu -->
 
-    <button class="mat-button-menu" mat-button routerLink="document/list" *ngIf="username === 'admin'">
+    <button class="mat-button-menu" mat-button routerLink="document/list" *ngIf="connectedRole === 'ADMIN'">
       <mat-icon>list</mat-icon>
       <span>Documents list</span>
     </button>
 
-    <button class="mat-button-menu" mat-button routerLink="requests" *ngIf="username === 'admin'">
+    <button class="mat-button-menu" mat-button routerLink="requests" *ngIf="connectedRole === 'ADMIN'">
       <mat-icon>poll</mat-icon>
       <span>Archiving requests</span>
     </button>
 
     <!-- Candidat menu -->
 
-    <button class="mat-button-menu" mat-button [matMenuTriggerFor]="documentMenu" *ngIf="username === 'user'">
+    <button class="mat-button-menu" mat-button [matMenuTriggerFor]="documentMenu" *ngIf="connectedRole === 'USER'">
       <mat-icon>list</mat-icon>&nbsp;
       <span>Documents</span>
     </button>
 
     <span class="fill-remaining-space"></span>
-    <!-- Fake shit -->
-    <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{username}}</b></span>
-
-    <!-- Real shit -->
-    <!-- <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{connectedUser?.account.username}}</b></span> -->
+    <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{connectedUser?.account.username}}</b></span>
     <button class="mat-button-menu" mat-button [matMenuTriggerFor]="authMenu">
       <mat-icon>menu</mat-icon>
     </button>

@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class DocumentService {
   url = environment.API_URL + '/documents';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router, private tokenService: TokenService) { }
 
   saveDocument(document, content) {
     const fd = new FormData();
@@ -35,7 +37,11 @@ export class DocumentService {
   }
 
   download(id) {
-    return this.http.get(this.url + '/download/' + id);
+    window.location.href = this.url + '/download/' + id + '?access_token=' + this.tokenService.getToken();
+  }
+
+  getMyDocuments() {
+    return this.http.get(this.url + '/my-documents');
   }
 
   findAll() {

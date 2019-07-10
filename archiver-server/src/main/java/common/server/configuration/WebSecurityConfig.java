@@ -23,8 +23,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-import static common.server.util.UtilContants.LOGIN_URL;
-import static common.server.util.UtilContants.REGISTRATION_URL;
+import static common.server.util.UtilContants.*;
 
 @Configuration
 @EnableWebSecurity
@@ -45,6 +44,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						.permitAll()
 					.antMatchers(HttpMethod.OPTIONS)
 						.permitAll()
+				.antMatchers(DOWNLOAD_URL)
+				.permitAll()
 					.anyRequest()
 						.authenticated()
 			.and()

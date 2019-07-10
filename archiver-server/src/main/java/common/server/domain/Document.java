@@ -30,10 +30,12 @@ public class Document {
 
     private String designation;
 
+    private String mime;
+
     @ManyToOne
     private User user;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Request request;
 
 
@@ -148,5 +150,13 @@ public class Document {
 
     public void setContent(byte[] content) {
         this.content = content;
+    }
+
+    public String getMime() {
+        return mime;
+    }
+
+    public void setMime(String mime) {
+        this.mime = mime;
     }
 }
