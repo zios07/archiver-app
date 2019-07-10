@@ -6,40 +6,23 @@
     <div class="col-8">
 
       <!-- Default form contact -->
-      <form class="text-center border border-light p-5">
+
+      <form class="text-center border border-light p-5" *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()"
+        #signupForm="ngForm">
 
         <p class="h4 mb-4">Create new Document</p>
 
         <!-- Name -->
-        <input type="text" id="docName" class="form-control mb-4" placeholder="Name">
-        <input type="text" id="docSubject" class="form-control mb-4" placeholder="Designation">
-        <input type="text" id="docDescription" class="form-control mb-4" placeholder="Description">
-
-
-        <!-- Post -->
-
+        <input formControlName="name" type="text" id="docName" class="form-control mb-4" placeholder="Name">
+        <input formControlName="designation" type="text" id="docSubject" class="form-control mb-4"
+          placeholder="Designation">
+        <input formControlName="description" type="text" id="docDescription" class="form-control mb-4"
+          placeholder="Description">
         <br>
-        <label>Request archiving </label> <br>
-        <!-- Default inline 1-->
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" class="custom-control-input" id="defaultInline1" name="inlineDefaultRadiosExample"
-            mdbInput>
-          <label class="custom-control-label" for="defaultInline1">Yes</label>
-        </div>
-
-
-        <!-- Default inline 3-->
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" class="custom-control-input" id="defaultInline3" name="inlineDefaultRadiosExample"
-            mdbInput>
-          <label class="custom-control-label" for="defaultInline3">No</label>
-        </div>
-        <br>
-
         <hr>
 
         <label>Select your Document : </label> <br><br>
-        <input type="file">
+        <input type="file" (change)="selectFile($event)">
 
         <br><br>
 
