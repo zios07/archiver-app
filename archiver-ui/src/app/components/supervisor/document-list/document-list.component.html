@@ -1,6 +1,6 @@
 <br><br>
 <form class="text-center border border-light p-5">
-  <p class="h4 mb-4">Documents uploaded by users</p>
+  <p class="h4 mb-4">Liste des documents</p>
 </form>
 <br><br>
 <div class="container">
@@ -26,7 +26,7 @@
               <mdb-badge *ngIf="el.request.status ==='Declined'" color="red">{{el.request.status}}</mdb-badge>
             </td>
             <td>
-              <button type="button" mdbBtn color="green" (click)="download(el.id)" mdbWavesEffect>Download</button>
+              <button type="button" mdbBtn color="green" (click)="download(el.id)" mdbWavesEffect>Telecharger</button>
             </td>
           </tr>
         </tbody>

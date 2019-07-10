@@ -2,19 +2,19 @@
   <mat-toolbar color="primary" *ngIf="authenticated">
     <a mat-button color="secondary" routerLink="home">
       <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
-      <span>HOME</span>
+      <span>Accueil</span>
     </a>
 
     <!-- Admin menu -->
 
     <button class="mat-button-menu" mat-button routerLink="document/list" *ngIf="connectedRole === 'ADMIN'">
       <mat-icon>list</mat-icon>
-      <span>Documents list</span>
+      <span>Liste des documents</span>
     </button>
 
     <button class="mat-button-menu" mat-button routerLink="requests" *ngIf="connectedRole === 'ADMIN'">
       <mat-icon>poll</mat-icon>
-      <span>Archiving requests</span>
+      <span>Demandes d'archivage</span>
     </button>
 
     <!-- Candidat menu -->
@@ -33,18 +33,18 @@
     <mat-menu #documentMenu="matMenu">
       <a mat-menu-item routerLink="document/create">
         <mat-icon>add</mat-icon>
-        <span>Create document</span>
+        <span>Creation d'un document</span>
       </a>
       <a mat-menu-item routerLink="my-documents">
         <mat-icon>list</mat-icon>
-        <span>View my documents</span>
+        <span>Mes documents</span>
       </a>
     </mat-menu>
 
     <mat-menu #authMenu="matMenu">
       <a mat-menu-item routerLink="profile">
         <mat-icon>person</mat-icon>
-        <span>Profil</span>
+        <span>Profile</span>
       </a>
       <a mat-menu-item (click)="logout()">
         <mat-icon>clear</mat-icon>
@@ -58,24 +58,24 @@
 
     <a mat-button color="primary" routerLink="">
       <mat-icon>home</mat-icon>&nbsp;
-      <span>My Application</span>
+      <span>Archiver Application</span>
     </a>
 
     <span class="fill-remaining-space"></span>
 
     <button class="mat-button-menu" mat-button [matMenuTriggerFor]="authmenu">
       <!-- <mat-icon>security</mat-icon> -->
-      <span>Sign in/up</span>
+      <span>Connexion/inscription</span>
     </button>
 
     <mat-menu #authmenu="matMenu">
 
       <a routerLink="login" mat-menu-item color="primary">
-        <span>Login</span>
+        <span>Connexion</span>
       </a>
 
       <a routerLink="signup" mat-menu-item color="primary">
-        <span>Register</span>
+        <span>Inscription</span>
       </a>
     </mat-menu>
 
